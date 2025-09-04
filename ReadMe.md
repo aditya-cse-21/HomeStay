@@ -1,6 +1,5 @@
 # 🏨 HomeStay: Your Perfect Stay, Simplified
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-green?logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -10,25 +9,6 @@
 [![Stripe](https://img.shields.io/badge/Stripe-Payments-635BFF?logo=stripe&logoColor=white)](https://stripe.com)
 [![Cloudinary](https://img.shields.io/badge/Cloudinary-Image_Storage-3448C5?logo=cloudinary&logoColor=white)](https://cloudinary.com)
 
----
-
-## 📖 Table of Contents
-
-- [Project Overview](#-project-overview)
-- [Live Demo](#-live-demo)
-- [Key Features](#-key-features)
-- [Technology Stack](#-technology-stack)
-- [Project Structure](#-project-structure)
-- [Detailed Functionality](#-detailed-functionality)
-- [Installation Guide](#-installation-guide)
-- [Environment Variables](#-environment-variables)
-- [API Documentation](#-api-documentation)
-- [Deployment](#-deployment)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Contact](#-contact)
-
----
 
 ## 🌟 Project Overview
 
@@ -44,7 +24,7 @@ Provide travelers with effortless access to premium accommodations while empower
 
 ## 🌐 Live Demo
 
-- **Frontend**: [HomeStay Live App](https://homestay.vercel.app/)
+- **Frontend**: [HomeStay Live App](https://home-stay-one.vercel.app/)
 - **Backend API**: [API Documentation](https://homestay-backend.onrender.com/api)
 
 ---
@@ -542,8 +522,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Abinash Das**
 - Email: [aditya21cse@gmail.com](aditya21cse@gmail.com)
-- GitHub: [@AbiNash1017](https://github.com/aditya-cse-21)
-- LinkedIn: [Abinash Das](https://linkedin.com/in/adityaacse)
+- GitHub: [aditya-cse-21](https://github.com/aditya-cse-21)
+- LinkedIn: [adityaacse](https://linkedin.com/in/adityaacse)
 
 ---
 
@@ -560,3 +540,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 *Built with ❤️ by Aditya*
+
