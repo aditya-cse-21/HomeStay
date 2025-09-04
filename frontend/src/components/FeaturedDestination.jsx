@@ -37,21 +37,23 @@ const FeaturedDestination = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl place-items-center">
-          {rooms.slice(0, 4).map((room, index) => (
-            <div 
-              key={room._id} 
-              className={`transform transition-all duration-700 hover:scale-105 w-full max-w-sm ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-              }`}
-              style={{ 
-                transitionDelay: `${index * 150}ms`,
-                animationDelay: `${index * 150}ms`
-              }}
-            >
-              <HotelCard room={room} index={index} />
-            </div>
-          ))}
+        <div className="w-full flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl place-items-center">
+            {rooms.slice(0, 4).map((room, index) => (
+              <div 
+                key={room._id} 
+                className={`transform transition-all duration-700 hover:scale-105 w-full max-w-sm ${
+                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+                }`}
+                style={{ 
+                  transitionDelay: `${index * 150}ms`,
+                  animationDelay: `${index * 150}ms`
+                }}
+              >
+                <HotelCard room={room} index={index} />
+              </div>
+            ))}
+          </div>
         </div>
         
         <div className={`text-center mt-16 transition-all duration-1000 delay-500 ${
