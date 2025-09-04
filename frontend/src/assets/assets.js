@@ -131,8 +131,8 @@ export const roomCommonData = [
 // User Dummy Data
 export const userDummyData = {
     "_id": "user_2unqyL4diJFP1E3pIBnasc7w8hP",
-    "username": "Abinash Das",
-    "email": "user.abinash.das.dev@gmail.com",
+    "username": "Aditya",
+    "email": "aditya21cse@gmail.com",
     "image": "https://avatars.githubusercontent.com/u/119941550?v=4",
     "role": "hotelOwner",
     "createdAt": "2025-03-25T09:29:16.367Z",
