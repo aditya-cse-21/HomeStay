@@ -12,7 +12,18 @@ const MyBookings = () => {
   //Funtion to fetch the User Booking Data from database
   const fetchUserBookings = async () => {
     try {
-      const { data } = await axios.get('/api/bookings/user', { headers: { Authorization: `Bearer ${await getToken()}` } });
+      if (!user) {
+        console.log("User not authenticated");
+        return;
+      }
+      
+      const token = await getToken();
+      if (!token) {
+        console.log("No authentication token available");
+        return;
+      }
+      
+      const { data } = await axios.get('/api/bookings/user', { headers: { Authorization: `Bearer ${token}` } });
 
       if (data.success) {
         setBookings(data.bookings);
@@ -21,7 +32,14 @@ const MyBookings = () => {
       }
 
     } catch (error) {
-      toast.error(error.message);
+      console.error("Bookings fetch error:", error);
+      if (error.response?.status === 401) {
+        toast.error("Please log in to view your bookings");
+      } else if (error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Failed to load bookings. Please try again.");
+      }
     }
   };
 

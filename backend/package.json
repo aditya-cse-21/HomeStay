@@ -1,5 +1,5 @@
 {
-  "name": "nexstay-Server",
+  "name": "homestay-Server",
   "version": "1.0.0",
   "description": "A hotel booking App that lets user book,list, rate and review the hotel",
   "main": "server.js",

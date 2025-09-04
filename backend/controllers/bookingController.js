@@ -77,15 +77,15 @@ export const createBookings = async (req, res) => {
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
             to: req.user.email,
-            subject: 'Your NexStay Booking Confirmation',
+            subject: 'Your HomeStay Booking Confirmation',
             html: `
                 <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9f9f9; padding: 40px; color: #333;">
                 <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <h1 style="color: #2c3e50; font-size: 26px; margin-bottom: 10px;">🌟 Your NexStay Booking Is Confirmed!</h1>
+                <h1 style="color: #2c3e50; font-size: 26px; margin-bottom: 10px;">🌟 Your HomeStay Booking Is Confirmed!</h1>
                 <p style="font-size: 16px;">Dear <strong>${req.user.username}</strong>,</p>
       
                 <p style="font-size: 15px; line-height: 1.6;">
-                Thank you for choosing <strong>NexStay</strong> — where comfort meets elegance. We’re delighted to confirm your booking and can’t wait to host you. Below are your reservation details:
+                Thank you for choosing <strong>HomeStay</strong> — where comfort meets elegance. We're delighted to confirm your booking and can't wait to host you. Below are your reservation details:
                 </p>
       
                 <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
@@ -116,12 +116,12 @@ export const createBookings = async (req, res) => {
                 </p>
       
                 <p style="margin-top: 20px; font-size: 15px;">Warm regards,</p>
-                <p style="font-size: 15px;"><strong>The NexStay Concierge Team</strong></p>
+                <p style="font-size: 15px;"><strong>The HomeStay Concierge Team</strong></p>
 
                 <hr style="margin: 30px 0; border: none; border-top: 1px solid #e0e0e0;" />
 
                 <p style="font-size: 13px; color: #888888; text-align: center;">
-                Need help? Contact us at <a href="mailto:support@nexstay.com" style="color: #3498db;">support@nexstay.com</a>
+                Need help? Contact us at <a href="mailto:support@homestay.com" style="color: #3498db;">support@homestay.com</a>
                 </p>
                 </div>
                 </div>

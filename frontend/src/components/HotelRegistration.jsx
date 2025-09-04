@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const HotelRegistration = () => {
 
-  const { setShowHotelRegistration, axios, getToken, setIsOwner } = useAppContext();
+  const { setShowHotelRegistration, axios, getToken, setIsOwner, user } = useAppContext();
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -16,20 +16,45 @@ const HotelRegistration = () => {
   const onSubmitHandler = async (event) => {
     try {
       event.preventDefault();
+      
+      // Check if user is authenticated
+      if (!user) {
+        toast.error("Please log in to register your hotel");
+        return;
+      }
+      
+      const token = await getToken();
+      if (!token) {
+        toast.error("Authentication token not available. Please try logging in again.");
+        return;
+      }
+
       const { data } = await axios.post(`/api/hotels/`, { name, contact, address, city }, {
-        headers: { Authorization: `Bearer ${await getToken()}` }
+        headers: { Authorization: `Bearer ${token}` }
       })
 
       if (data.success) {
         toast.success(data.message);
         setIsOwner(true);
         setShowHotelRegistration(false);
+        // Reset form
+        setName("");
+        setAddress("");
+        setContact("");
+        setCity("");
       } else {
         toast.error(data.message);
       }
 
     } catch (error) {
-      toast.error(error.message);
+      console.error("Hotel registration error:", error);
+      if (error.response?.status === 401) {
+        toast.error("Please log in to register your hotel");
+      } else if (error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Failed to register hotel. Please try again.");
+      }
     }
   }
 

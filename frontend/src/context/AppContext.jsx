@@ -28,11 +28,17 @@ export const AppProvider = ({ children }) => {
             if (data.success) {
                 setRooms(data.rooms);
             } else {
+                console.log('Rooms fetch failed:', data.message);
                 toast.error(data.message);
             }
 
         } catch (error) {
-            toast.error(error.message);
+            console.log('Rooms fetch error:', error.message);
+            if (error.response?.status === 401) {
+                console.log('Authentication required for rooms');
+            } else {
+                toast.error('Failed to load rooms: ' + error.message);
+            }
         }
     };
 
@@ -41,9 +47,18 @@ export const AppProvider = ({ children }) => {
     //function to fetch user details
     const fetchUser = async () => {
         try {
+            if (!user) {
+                return; // Don't fetch if user is not authenticated
+            }
+
+            const token = await getToken();
+            if (!token) {
+                return; // Don't fetch if no token available
+            }
+
             const { data } = await axios.get('/api/user',
                 {
-                    headers: { Authorization: `Bearer ${await getToken()}` }
+                    headers: { Authorization: `Bearer ${token}` }
                 }
             );
 
@@ -51,13 +66,14 @@ export const AppProvider = ({ children }) => {
                 setIsOwner(data.role === "hotelOwner");
                 setSearchedCities(data.recentSearchedCities);
             } else {
-                //Retry Fetching user details after 5 seconds
-                setTimeout(() => {
-                    fetchUser();
-                }, 5000)
+                console.log('User data fetch failed:', data.message);
             }
         } catch (error) {
-            toast.error(error.message);
+            console.log('User fetch error:', error.message);
+            // Don't show toast error for authentication issues
+            if (error.response?.status !== 401) {
+                toast.error(error.message);
+            }
         }
     }
 

@@ -1,22 +1,73 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HotelCard from "./HotelCard";
 import Title from "./Title";
 import { useAppContext } from "../context/AppContext";
 
 const FeaturedDestination = () => {
-
   const { rooms, navigate } = useAppContext();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 200);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   //here the return will be true only if there is a room or more than 0
   return rooms.length > 0 && (
-    <div className="flex flex-col items-center px-6 md:px-16 lg:px-24 bg-slate-100 py-20">
-      <Title title='Featured Destination' subTitle='Discover our handpicked selection of exceptional properties around the world, offering unparalleled luxury and unforgettable experiences.' />
-      <div className="flex flex-wrap items-center justify-center gap-6 mt-20">
-        {rooms.slice(0, 4).map((room, index) => (
-          <HotelCard key={room._id} room={room} index={index} />
-        ))}
+    <div className="bg-white py-24">
+      <div className="flex flex-col items-center px-6 md:px-16 lg:px-24 xl:px-32">
+        <div className={`text-center mb-16 transition-all duration-1000 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <div className="inline-block mb-6">
+            <span className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              ⭐ Featured Collection
+            </span>
+          </div>
+          <h2 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            Featured Destinations
+          </h2>
+          <div className="w-24 h-0.5 bg-gray-300 mx-auto mb-6"></div>
+          <p className="max-w-3xl mx-auto text-lg text-gray-600 leading-relaxed">
+            Discover our handpicked selection of exceptional properties around the world, offering 
+            <span className="text-gray-900 font-semibold"> unparalleled luxury and unforgettable experiences</span>.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
+          {rooms.slice(0, 4).map((room, index) => (
+            <div 
+              key={room._id} 
+              className={`transform transition-all duration-700 hover:scale-105 ${
+                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+              }`}
+              style={{ 
+                transitionDelay: `${index * 150}ms`,
+                animationDelay: `${index * 150}ms`
+              }}
+            >
+              <HotelCard room={room} index={index} />
+            </div>
+          ))}
+        </div>
+        
+        <div className={`text-center mt-16 transition-all duration-1000 delay-500 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <button 
+            onClick={() => { navigate('/rooms'); scrollTo(0, 0) }} 
+            className="group inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            <span>View All Destinations</span>
+            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </button>
+        </div>
       </div>
-      <button onClick={() => { navigate('/rooms'); scrollTo(0, 0) }} className="my-16 px-4 py-2 text-sm font-medium border border-gray-300 rounded bg-white hover:bg-gray-50 transition-all cursor-pointer">View All Destinations</button>
     </div>
   );
 };

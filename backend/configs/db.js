@@ -13,7 +13,7 @@ const connectDB = async () => {
         
         // Connect to MongoDB with proper error handling
         await mongoose.connect(mongoUri, {
-            dbName: 'NexStay' // Use dbName option instead of appending to URI
+            dbName: 'HomeStay' // Use dbName option instead of appending to URI
         });
         
         console.log("Successfully connected to MongoDB");
