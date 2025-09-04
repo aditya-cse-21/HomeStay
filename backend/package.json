@@ -8,9 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed-production": "node seedProductionData.js"
   },
-  "author": "Abinash Das",
-  "email": "abinash.das.dev@gmail.com",
-  "license": "MIT",
+  "author": "Aditya",
+  "email": "aditya21cse@gmail.com",
   "dependencies": {
     "@clerk/express": "^1.7.2",
     "cloudinary": "^2.7.0",
