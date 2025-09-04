@@ -38,11 +38,11 @@ const FeaturedDestination = () => {
         </div>
         
         <div className="w-full flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl place-items-center">
-            {rooms.slice(0, 4).map((room, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl place-items-center">
+            {rooms.slice(0, 3).map((room, index) => (
               <div 
                 key={room._id} 
-                className={`transform transition-all duration-700 hover:scale-105 w-full max-w-sm ${
+                className={`transform transition-all duration-700 hover:scale-105 w-full ${
                   isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
                 }`}
                 style={{ 
