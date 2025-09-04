@@ -124,7 +124,7 @@ const About = () => {
         <div className="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-lg border border-gray-200 shadow-sm">
           <span className="text-gray-500 text-sm">© {new Date().getFullYear()}</span>
           <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-          <span className="text-gray-500 text-sm font-medium">Abinash</span>
+          <span className="text-gray-500 text-sm font-medium">Aditya</span>
           <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
           <span className="text-gray-700 text-sm font-semibold">HomeStay Project</span>
         </div>
