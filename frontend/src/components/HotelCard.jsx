@@ -6,9 +6,9 @@ import { assets } from '../assets/assets'
 const HotelCard = ({room, index}) => {
   return (
     <Link to={'/rooms/'+room._id} onClick={()=> scrollTo(0,0)} key={room._id} 
-    className='group relative max-w-70 w-full h-[420px] rounded-xl overflow-hidden bg-white text-gray-500/90 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-gray-300 flex flex-col'>
+    className='group relative max-w-70 w-full h-[480px] sm:h-[420px] rounded-xl overflow-hidden bg-white text-gray-500/90 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-gray-300 flex flex-col'>
         {/* Display room image */}
-        <div className="relative overflow-hidden h-40 flex-shrink-0">
+        <div className="relative overflow-hidden h-48 sm:h-40 flex-shrink-0">
           <img 
             src={room.images[0]} 
             alt="hotel room"
@@ -31,7 +31,7 @@ const HotelCard = ({room, index}) => {
           </div>
         </div>
 
-                  <div className='p-5 flex flex-col flex-grow min-h-0'>
+                  <div className='p-6 sm:p-5 flex flex-col flex-grow min-h-0'>
               {/* Hotel name and rating */}
               <div className='flex items-start justify-between mb-3 flex-shrink-0'>
                   <div className="flex-1 min-w-0">
