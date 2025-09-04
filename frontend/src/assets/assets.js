@@ -37,7 +37,6 @@ import listIcon from "./listIcon.svg";
 import uploadArea from "./uploadArea.svg";
 import totalBookingIcon from "./totalBookingIcon.svg";
 import totalRevenueIcon from "./totalRevenueIcon.svg";
-import experinceBg from "./experienceImg.jpg"
 
 export const assets = {
     logo,
@@ -72,7 +71,6 @@ export const assets = {
     uploadArea,
     totalBookingIcon,
     totalRevenueIcon,
-    experinceBg,
 }
 
 
@@ -108,9 +106,9 @@ export const exclusiveOffers = [
 
 // Testimonials Dummy Data
 export const testimonials = [
-    { id: 1, name: "Emma Rodriguez", address: "Barcelona, Spain", image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200", rating: 5, review: "I've used many booking platforms before, but none compare to the personalized experience and attention to detail that HomeStay provides." },
-    { id: 2, name: "Liam Johnson", address: "New York, USA", image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200", rating: 4, review: "HomeStay exceeded my expectations. The booking process was seamless, and the hotels were absolutely top-notch. Highly recommended!" },
-    { id: 3, name: "Sophia Lee", address: "Seoul, South Korea", image: "https://images.unsplash.com/photo-1701615004837-40d8573b6652?q=80&w=200", rating: 5, review: "Amazing service! I always find the best luxury accommodations through HomeStay. Their recommendations never disappoint!" }
+    { id: 1, name: "Rajesh Kumar", address: "Mumbai, India", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200", rating: 5, review: "HomeStay made my business trip to Delhi absolutely seamless. The hotel recommendations were perfect, and the booking process was so smooth. I felt like I was staying at a 5-star property!" },
+    { id: 2, name: "Emma Rodriguez", address: "Barcelona, Spain", image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200", rating: 5, review: "I've used many booking platforms before, but none compare to the personalized experience and attention to detail that HomeStay provides." },
+    { id: 3, name: "Priya Sharma", address: "Bangalore, India", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200", rating: 5, review: "As a frequent traveler, I've tried many platforms, but HomeStay's attention to detail and customer service is unmatched. The hotels they recommend always exceed my expectations!" }
 ];
 
 // Facility Icon
@@ -270,13 +268,3 @@ export const dashboardDummyData = {
     "totalRevenue": 897,
     "bookings": userBookingsDummyData
 }
-
-// --------- SVG code for Book Icon------
-/* 
-const BookIcon = ()=>(
-    <svg className="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" >
-    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4" />
-</svg>
-)
-
-*/

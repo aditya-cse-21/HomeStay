@@ -6,18 +6,29 @@ import { useAppContext } from "../context/AppContext";
 
 const CheckBox = ({ label, selected = false, onChange = () => { } }) => {
   return (
-    <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-      <input type="checkbox" checked={selected} onChange={(e) => onChange(e.target.checked, label)} />
-      <span className="font-light select-none">{label}</span>
+    <label className="flex gap-3 items-center cursor-pointer text-sm hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200">
+      <input 
+        type="checkbox" 
+        checked={selected} 
+        onChange={(e) => onChange(e.target.checked, label)}
+        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+      />
+      <span className="font-medium select-none text-gray-700">{label}</span>
     </label>
   )
 }
 
 const RadioButton = ({ label, selected = false, onChange = () => { } }) => {
   return (
-    <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-      <input type="radio" name="sortOption" checked={selected} onChange={() => onChange(label)} />
-      <span className="font-light select-none">{label}</span>
+    <label className="flex gap-3 items-center cursor-pointer text-sm hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200">
+      <input 
+        type="radio" 
+        name="sortOption" 
+        checked={selected} 
+        onChange={() => onChange(label)}
+        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+      />
+      <span className="font-medium select-none text-gray-700">{label}</span>
     </label>
   )
 }
@@ -257,12 +268,14 @@ const AllRooms = () => {
 
           <div className={`${openFilters ? 'h-auto' : 'h-0 lg:h-auto'} overflow-hidden transition-all duration-700`}>
             <div className="px-5 pt-5">
-              <p className="font-medium text-gray-800 pb-2">Popular Filters</p>
-              {roomTypes.map((room, index) => (
-                <CheckBox key={index} label={room}
-                  selected={selectedFilters.roomType.includes(room)}
-                  onChange={(checked) => handleFilterChange(checked, room, 'roomType')} />
-              ))}
+              <p className="font-medium text-gray-800 pb-3">Room Types</p>
+              <div className="space-y-2 max-h-48 overflow-y-auto">
+                {roomTypes.map((room, index) => (
+                  <CheckBox key={index} label={room}
+                    selected={selectedFilters.roomType.includes(room)}
+                    onChange={(checked) => handleFilterChange(checked, room, 'roomType')} />
+                ))}
+              </div>
             </div>
 
             <div className="px-5 pt-5">
