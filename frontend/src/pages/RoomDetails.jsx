@@ -150,33 +150,103 @@ const RoomDetails = () => {
         </div>
 
         {/**CheckIn Checkout form */}
-        <form onSubmit={onSubmitHandler} className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-6 rounded-xl border border-gray-300 outline-none mx-auto mt-16 max-w-6xl">
-
-          <div className="flex flex-col flex-wrap md:flex-row items-start md:items-center gap-4 md:gap-10 text-gray-500">
-
-            <div className="flex flex-col">
-              <label htmlFor="checkInDate" className="font-medium">Check-In</label>
-              <input onChange={(e) => setCheckInDate(e.target.value)} min={new Date().toISOString().split('T')[0]} type="date" id="checkInDate" placeholder="Check-In"
-                className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" required />
+        <form onSubmit={onSubmitHandler} className="bg-white shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-4 md:p-6 rounded-xl border border-gray-300 outline-none mx-auto mt-16 max-w-6xl">
+          
+          {/* Mobile Layout */}
+          <div className="md:hidden space-y-4">
+            <div className="grid grid-cols-1 gap-4">
+              <div className="flex flex-col">
+                <label htmlFor="checkInDate" className="font-medium text-gray-700 mb-1">Check-In</label>
+                <input 
+                  onChange={(e) => setCheckInDate(e.target.value)} 
+                  min={new Date().toISOString().split('T')[0]} 
+                  type="date" 
+                  id="checkInDate" 
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" 
+                  required 
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="checkOutDate" className="font-medium text-gray-700 mb-1">Check-Out</label>
+                <input 
+                  onChange={(e) => setCheckOutDate(e.target.value)} 
+                  min={checkInDate} 
+                  disabled={!checkInDate} 
+                  type="date" 
+                  id="checkOutDate" 
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 disabled:bg-gray-100" 
+                  required 
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="guests" className="font-medium text-gray-700 mb-1">Guests</label>
+                <input 
+                  onChange={(e) => setGuests(e.target.value)} 
+                  value={guests} 
+                  type="number" 
+                  id="guests" 
+                  min="1"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" 
+                  required 
+                />
+              </div>
             </div>
-            <div className="w-px h-15 bg-gray-300/70 max-md:hidden" />
-            <div className="flex flex-col">
-              <label htmlFor="checkOutDate" className="font-medium">Check-Out</label>
-              <input onChange={(e) => setCheckOutDate(e.target.value)} min={checkInDate} disabled={!checkInDate} type="date" id="checkOutDate" placeholder="Check-Out"
-                className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" required />
-            </div>
-            <div className="w-px h-15 bg-gray-300/70 max-md:hidden" />
-            <div className="flex flex-col">
-              <label htmlFor="guests" className="font-medium">guests</label>
-              <input onChange={(e) => setGuests(e.target.value)} value={guests} type="number" id="guests" placeholder="1"
-                className="max-w-20 rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" required />
-            </div>
-
+            <button 
+              type="submit" 
+              className="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all text-white rounded-lg py-4 text-base font-semibold cursor-pointer shadow-lg"
+            >
+              {isAvailable ? "Book Now" : "Check Availability"}
+            </button>
           </div>
 
-          <button type="submit" className="bg-primary hover:bg-blue-700 active:scale-95 transition-all text-white rounded-md max-md:w-full max-md:mt-6 md:px-25 py-3 md:py-4 text-base cursor-pointer">
-            {isAvailable ? "Book Now" : "Check Availability"}
-          </button>
+          {/* Desktop Layout */}
+          <div className="hidden md:flex flex-row items-center justify-between">
+            <div className="flex flex-row items-center gap-8 text-gray-500">
+              <div className="flex flex-col">
+                <label htmlFor="checkInDate" className="font-medium">Check-In</label>
+                <input 
+                  onChange={(e) => setCheckInDate(e.target.value)} 
+                  min={new Date().toISOString().split('T')[0]} 
+                  type="date" 
+                  id="checkInDate" 
+                  className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" 
+                  required 
+                />
+              </div>
+              <div className="w-px h-15 bg-gray-300/70" />
+              <div className="flex flex-col">
+                <label htmlFor="checkOutDate" className="font-medium">Check-Out</label>
+                <input 
+                  onChange={(e) => setCheckOutDate(e.target.value)} 
+                  min={checkInDate} 
+                  disabled={!checkInDate} 
+                  type="date" 
+                  id="checkOutDate" 
+                  className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" 
+                  required 
+                />
+              </div>
+              <div className="w-px h-15 bg-gray-300/70" />
+              <div className="flex flex-col">
+                <label htmlFor="guests" className="font-medium">Guests</label>
+                <input 
+                  onChange={(e) => setGuests(e.target.value)} 
+                  value={guests} 
+                  type="number" 
+                  id="guests" 
+                  min="1"
+                  className="max-w-20 rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" 
+                  required 
+                />
+              </div>
+            </div>
+            <button 
+              type="submit" 
+              className="bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all text-white rounded-md px-8 py-4 text-base cursor-pointer"
+            >
+              {isAvailable ? "Book Now" : "Check Availability"}
+            </button>
+          </div>
         </form>
 
         {/**common Specifications */}
