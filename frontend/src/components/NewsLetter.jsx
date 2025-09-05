@@ -15,7 +15,10 @@ const NewsLetter = () => {
         <div className={`text-center mb-12 transition-all duration-1000 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          <Title title={`Stay Inspired`} subTitle='Join our newsletter and be the first to discover new updates, exclusive offers, and inspiration.'/>
+         <div className="flex flex-col justify-center items-center text-center">
+            <h1 className="text-4xl md:text-[40px] font-playfair text-white">{`Stay Inspired`}</h1>
+            <p className='text-sm md:text-base text-gray-300 mt-2 max-w-174'>Join our newsletter and be the first to discover new updates, exclusive offers, and inspiration.</p>
+          </div>
         </div>
 
         <div className={`w-full max-w-2xl transition-all duration-1000 delay-300 ${
