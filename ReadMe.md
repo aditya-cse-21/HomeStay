@@ -24,8 +24,7 @@ Provide travelers with effortless access to premium accommodations while empower
 
 ## 🌐 Live Demo
 
-- **Frontend**: [HomeStay Live App](https://home-stay-one.vercel.app/)
-- **Backend API**: [API Documentation](https://homestay-backend.onrender.com/api)
+- [HomeStay Live App](https://home-stay-one.vercel.app/)
 
 ---
 
@@ -512,12 +511,6 @@ VITE_CURRENCY=$
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 ## 📬 Contact
 
 **Abinash Das**
@@ -540,4 +533,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 *Built with ❤️ by Aditya*
+
 
