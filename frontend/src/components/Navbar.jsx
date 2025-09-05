@@ -256,7 +256,7 @@ const Navbar = () => {
           <img
             src={assets.searchIcon}
             alt="search"
-            className={`h-5 w-5 transition-all duration-300 ${isScrolled && "invert"}`} 
+            className={`h-8 w-8 transition-all duration-300 ${isScrolled && "invert"}`} 
           />
         </button>
 
@@ -285,7 +285,7 @@ const Navbar = () => {
         <button
           className="absolute top-4 right-4"
           onClick={() => setIsMenuOpen(false)}>
-          <img src={assets.closeIcon} alt="close-menu" className="h-6.5" />
+          <img src={assets.closeIcon} alt="close-menu" className="h-8" />
         </button>
 
         {navLinks.map((link, i) => (
