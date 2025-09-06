@@ -12,7 +12,8 @@
 
 ## 🌟 Project Overview
 
-**HomeStay** is a comprehensive, full-stack hotel booking and management platform that revolutionizes the way travelers discover, book, and manage their accommodations. Built with modern web technologies, it provides a seamless experience for both guests and hotel owners.
+**HomeStay** is a full-stack hotel booking platform with advanced search & filtering, real-time booking, secure Stripe payments, and role-based authentication.
+Includes a hotel owner dashboard for property management, mobile-first responsive design, and a modern user-friendly interface.
 
 ### 🎯 Vision
 To eliminate the complexities of travel planning by offering a centralized, intuitive platform that makes every journey feel truly exceptional through seamless booking experiences and personalized recommendations.
@@ -533,5 +534,6 @@ VITE_CURRENCY=$
 ---
 
 *Built with ❤️ by Aditya*
+
 
 
