@@ -8,31 +8,35 @@ const MyBookings = () => {
 
   const { axios, getToken, user } = useAppContext();
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   //Funtion to fetch the User Booking Data from database
   const fetchUserBookings = async () => {
     try {
+      setLoading(true);
+      
       if (!user) {
-        console.log("User not authenticated");
+        setLoading(false);
         return;
       }
       
       const token = await getToken();
       if (!token) {
-        console.log("No authentication token available");
+        setLoading(false);
         return;
       }
       
       const { data } = await axios.get('/api/bookings/user', { headers: { Authorization: `Bearer ${token}` } });
 
       if (data.success) {
-        setBookings(data.bookings);
+        setBookings(data.bookings || []);
       } else {
         toast.error(data.message);
+        setBookings([]);
       }
 
     } catch (error) {
-      console.error("Bookings fetch error:", error);
+      setBookings([]);
       if (error.response?.status === 401) {
         toast.error("Please log in to view your bookings");
       } else if (error.response?.data?.message) {
@@ -40,6 +44,8 @@ const MyBookings = () => {
       } else {
         toast.error("Failed to load bookings. Please try again.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,37 +82,55 @@ const MyBookings = () => {
         align="left" />
 
       <div className="max-w-6xl mt-8 w-full text-gray-800">
-        <div className="hidden md:grid md:grid-cols-[3fr_2fr_1fr] w-full border-b border-gray-300 font-medium text-base py-3">
-          <div className="w-1/3">Hotels</div>
-          <div className="w-1/3">Date & Timings</div>
-          <div className="w-1/3">Payment</div>
-        </div>
-        {bookings.map((booking) => (
+        {loading ? (
+          <div className="flex justify-center items-center py-12">
+            <div className="text-lg text-gray-500">Loading your bookings...</div>
+          </div>
+        ) : bookings.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <div className="text-6xl mb-4">🏨</div>
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">No Bookings Yet</h3>
+            <p className="text-gray-500 mb-6">You haven't made any hotel bookings yet.</p>
+            <button 
+              onClick={() => window.location.href = '/'}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors"
+            >
+              Explore Hotels
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="hidden md:grid md:grid-cols-[3fr_2fr_1fr] w-full border-b border-gray-300 font-medium text-base py-3">
+              <div className="w-1/3">Hotels</div>
+              <div className="w-1/3">Date & Timings</div>
+              <div className="w-1/3">Payment</div>
+            </div>
+            {bookings.filter(booking => booking && booking._id).map((booking) => (
           <div key={booking._id}
             className="grid grid-cols-1 md:grid-cols-[3fr_2fr_1fr] w-full border-b border-gray-300 py-6 first:border-t">
 
             {/*-----Hotel details-----*/}
             <div className="flex flex-col md:flex-row">
               <img
-                src={booking.room.images[0]}
+                src={booking.room?.images?.[0] || assets.roomImg1}
                 alt="hotel-img"
                 className="min-md:w-44 rounded shadow object-cover" />
 
               <div className="flex flex-col gap-1.5 max-md:mt-3 min-md:ml-4">
-                <p className="font-playfair text-2xl">{booking.hotel.name}
-                  <span className="font-inter text-sm"> ({booking.room.roomType})</span>
+                <p className="font-playfair text-2xl">{booking.hotel?.name || 'Hotel Name Not Available'}
+                  <span className="font-inter text-sm"> ({booking.room?.roomType || 'Room Type Not Available'})</span>
                 </p>
 
                 <div className="flex items-center gap-1 text-sm text-gray-500">
                   <img src={assets.locationIcon} alt="location-icon" />
-                  <span>{booking.hotel.address}</span>
+                  <span>{booking.hotel?.address || 'Address Not Available'}</span>
                 </div>
 
                 <div className="flex items-center gap-1 text-sm text-gray-500">
                   <img src={assets.guestsIcon} alt="guest-icon" />
-                  <span>Guests:{booking.guests}</span>
+                  <span>Guests: {booking.guests || 'N/A'}</span>
                 </div>
-                <p className="text-base">Total: ${booking.totalPrice}</p>
+                <p className="text-base">Total: ${booking.totalPrice || 'N/A'}</p>
               </div>
             </div>
 
@@ -117,14 +141,14 @@ const MyBookings = () => {
               <div>
                 <p>Check-In:</p>
                 <p className="text-gray-500 text-sm">
-                  {new Date(booking.checkInDate).toDateString()}
+                  {booking.checkInDate ? new Date(booking.checkInDate).toDateString() : 'Date Not Available'}
                 </p>
               </div>
               {/*----Chek-Out----*/}
               <div>
                 <p>Check-Out:</p>
                 <p className="text-gray-500 text-sm">
-                  {new Date(booking.checkOutDate).toDateString()}
+                  {booking.checkOutDate ? new Date(booking.checkOutDate).toDateString() : 'Date Not Available'}
                 </p>
               </div>
             </div>
@@ -144,6 +168,8 @@ const MyBookings = () => {
             </div>
           </div>
         ))}
+          </>
+        )}
       </div>
     </div>
   );
