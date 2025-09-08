@@ -17,18 +17,30 @@ const RoomDetails = () => {
   const [guests, setGuests] = useState(1);
 
   const [isAvailable, setIsAvailable] = useState(false);
+  const [isCheckingAvailability, setIsCheckingAvailability] = useState(false);
 
   //check if the Room is Available
   const checkAvailability = async () => {
     try {
+      setIsCheckingAvailability(true);
+      
       if (!checkInDate || !checkOutDate) {
         toast.error("Please select both check-in and check-out dates.");
+        setIsCheckingAvailability(false);
         return;
       }
 
       //check if checkInDate is greatet than checkOutDate
       if (new Date(checkInDate) >= new Date(checkOutDate)) {
         toast.error("Check-in date must be earlier than check-out date!!");
+        setIsCheckingAvailability(false);
+        return;
+      }
+
+      // Additional validation
+      if (new Date(checkInDate) < new Date()) {
+        toast.error("Check-in date cannot be in the past!");
+        setIsCheckingAvailability(false);
         return;
       }
 
@@ -47,7 +59,9 @@ const RoomDetails = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || error.message || 'Failed to check availability');
+    } finally {
+      setIsCheckingAvailability(false);
     }
   };
 
@@ -55,6 +69,12 @@ const RoomDetails = () => {
   const onSubmitHandler = async (e) => {
     try {
       e.preventDefault();
+
+      // Check if form is valid before proceeding
+      if (!e.target.checkValidity()) {
+        e.target.reportValidity();
+        return;
+      }
 
       if (!isAvailable) {
         return checkAvailability();
@@ -72,7 +92,7 @@ const RoomDetails = () => {
         }
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || error.message || 'Failed to process booking');
     }
   }
 
@@ -150,7 +170,7 @@ const RoomDetails = () => {
         </div>
 
         {/**CheckIn Checkout form */}
-        <form onSubmit={onSubmitHandler} className="bg-white shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-4 md:p-6 rounded-xl border border-gray-300 outline-none mx-auto mt-16 max-w-6xl">
+        <form onSubmit={onSubmitHandler} noValidate className="bg-white shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-4 md:p-6 rounded-xl border border-gray-300 outline-none mx-auto mt-16 max-w-6xl">
           
           {/* Mobile Layout */}
           <div className="md:hidden space-y-4">
@@ -162,8 +182,8 @@ const RoomDetails = () => {
                   min={new Date().toISOString().split('T')[0]} 
                   type="date" 
                   id="checkInDate" 
+                  name="checkInDate"
                   className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" 
-                  required 
                 />
               </div>
               <div className="flex flex-col">
@@ -174,8 +194,8 @@ const RoomDetails = () => {
                   disabled={!checkInDate} 
                   type="date" 
                   id="checkOutDate" 
+                  name="checkOutDate"
                   className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 disabled:bg-gray-100" 
-                  required 
                 />
               </div>
               <div className="flex flex-col">
@@ -185,17 +205,18 @@ const RoomDetails = () => {
                   value={guests} 
                   type="number" 
                   id="guests" 
+                  name="guests"
                   min="1"
                   className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" 
-                  required 
                 />
               </div>
             </div>
             <button 
               type="submit" 
-              className="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all text-white rounded-lg py-4 text-base font-semibold cursor-pointer shadow-lg"
+              disabled={isCheckingAvailability}
+              className="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all text-white rounded-lg py-4 text-base font-semibold cursor-pointer shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isAvailable ? "Book Now" : "Check Availability"}
+              {isCheckingAvailability ? "Checking..." : (isAvailable ? "Book Now" : "Check Availability")}
             </button>
           </div>
 
@@ -209,8 +230,8 @@ const RoomDetails = () => {
                   min={new Date().toISOString().split('T')[0]} 
                   type="date" 
                   id="checkInDate" 
+                  name="checkInDate"
                   className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" 
-                  required 
                 />
               </div>
               <div className="w-px h-15 bg-gray-300/70" />
@@ -222,8 +243,8 @@ const RoomDetails = () => {
                   disabled={!checkInDate} 
                   type="date" 
                   id="checkOutDate" 
+                  name="checkOutDate"
                   className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" 
-                  required 
                 />
               </div>
               <div className="w-px h-15 bg-gray-300/70" />
@@ -234,17 +255,18 @@ const RoomDetails = () => {
                   value={guests} 
                   type="number" 
                   id="guests" 
+                  name="guests"
                   min="1"
                   className="max-w-20 rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" 
-                  required 
                 />
               </div>
             </div>
             <button 
               type="submit" 
-              className="bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all text-white rounded-md px-8 py-4 text-base cursor-pointer"
+              disabled={isCheckingAvailability}
+              className="bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all text-white rounded-md px-8 py-4 text-base cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isAvailable ? "Book Now" : "Check Availability"}
+              {isCheckingAvailability ? "Checking..." : (isAvailable ? "Book Now" : "Check Availability")}
             </button>
           </div>
         </form>
